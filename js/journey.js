@@ -159,6 +159,7 @@
   }
   gl.addEventListener('click', e => { const b = e.target.closest('.gp'); if (b) showGap(b.dataset.id); });
   showGap(D.gaps[0].id);
+  $$('.tg button').forEach(b => b.addEventListener('click', () => { showGap(b.dataset.g); $('#gdetail').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); $$('.tg button').forEach(x => x.classList.toggle('on', x === b)); }));
 
   /* growth equation */
   const s = [1, 2, 3].map(i => $('#s' + i)), rf = $('#rf'), C = 2 * Math.PI * 50;
