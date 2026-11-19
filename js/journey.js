@@ -13,7 +13,7 @@
   const chIds = $$('.ch').map(c => c.id); let ci = 0;
   const labels = Object.fromEntries(dots.map(d => [d.dataset.c, $('span', d).textContent]));
   function hud() { $('#hudt').textContent = (ci + 1) + ' / ' + chIds.length + ' · ' + (labels[chIds[ci]] || ''); }
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { ci = chIds.indexOf(e.target.id); document.body.classList.toggle('dim', ci > 0); dots.forEach(d => d.classList.toggle('on', d.dataset.c === e.target.id)); hud(); } }), { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { ci = chIds.indexOf(e.target.id); document.body.classList.toggle('dim', ci > 0); window.__beansOff = ci > 0; dots.forEach(d => d.classList.toggle('on', d.dataset.c === e.target.id)); hud(); } }), { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   $$('.ch').forEach(c => io.observe(c)); hud();
   function goto(i) { i = Math.max(0, Math.min(chIds.length - 1, i)); $('#' + chIds[i]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
   $('#hprev').addEventListener('click', () => goto(ci - 1)); $('#hnext').addEventListener('click', () => goto(ci + 1));
